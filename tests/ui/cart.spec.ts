@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { loginAsStandardUser } from '../../src/utils/auth';
 import { InventoryPage } from '../../src/pages/InventoryPage';
 
 test('Add product to cart', async ({ page }) => {
-  await page.goto('/');
-  await page.fill('#user-name', 'standard_user');
-  await page.fill('#password', 'secret_sauce');
-  await page.click('#login-button');
+  await loginAsStandardUser(page);
 
   const inventory = new InventoryPage(page);
   await inventory.addBackpackToCart();
